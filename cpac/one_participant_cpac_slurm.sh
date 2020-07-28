@@ -15,4 +15,4 @@ singularity run \
     -B /rigel/psych/users/pab2163/studyforrest/scripts/cpac/configs:/configs \
     -B /rigel/psych/users/pab2163/studyforrest/preproc:/outputs \
     -B /rigel/psych/users/pab2163/studyforrest/scratch:/scratch \
-    /rigel/psych/app/cpac/cpac-singularity-image-06302020.simg /bids_dataset /outputs participant --participant_label sub-01  --pipeline_file /configs/cpac_init.yaml --n_cpus 10 --mem_gb 20 --save_working_dir
+    /rigel/psych/app/cpac/cpac-singularity-image-06302020.simg /bids_dataset /outputs participant --participant_label sub-01  --data_config_file /configs/data_config_cpac_init.yml --pipeline_file /configs/cpac_init.yaml --n_cpus 10 --mem_gb 20 --save_working_dir
