@@ -1,0 +1,28 @@
+# CPAC Data Configuration File
+# Version 1.6.2
+#
+# http://fcp-indi.github.io for more info.
+#
+# Tip: This file can be edited manually with a text editor for quick modifications.
+
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/anat/sub-01_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '01'
+  unique_id: movie

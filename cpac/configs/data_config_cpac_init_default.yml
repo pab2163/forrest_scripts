@@ -1,0 +1,322 @@
+# CPAC Data Configuration File
+# Version 1.6.2
+#
+# http://fcp-indi.github.io for more info.
+#
+# Tip: This file can be edited manually with a text editor for quick modifications.
+
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/anat/sub-01_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-01/ses-movie/func/sub-01_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '01'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/anat/sub-02_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-02/ses-movie/func/sub-02_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '02'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/anat/sub-03_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-03/ses-movie/func/sub-03_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '03'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/anat/sub-04_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-04/ses-movie/func/sub-04_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '04'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/anat/sub-05_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-05/ses-movie/func/sub-05_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '05'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/anat/sub-06_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-06/ses-movie/func/sub-06_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '06'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/anat/sub-09_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-09/ses-movie/func/sub-09_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: 09
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/anat/sub-10_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-10/ses-movie/func/sub-10_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '10'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/anat/sub-14_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-14/ses-movie/func/sub-14_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '14'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/anat/sub-15_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-15/ses-movie/func/sub-15_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '15'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/anat/sub-16_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-16/ses-movie/func/sub-16_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '16'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/anat/sub-17_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-17/ses-movie/func/sub-17_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '17'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/anat/sub-18_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-18/ses-movie/func/sub-18_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '18'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/anat/sub-19_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-19/ses-movie/func/sub-19_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '19'
+  unique_id: movie
+- anat: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/anat/sub-20_ses-movie_T1w.nii.gz
+  func:
+    movie_run-1:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-1_bold.nii.gz
+    movie_run-2:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-2_bold.nii.gz
+    movie_run-3:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-3_bold.nii.gz
+    movie_run-4:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-4_bold.nii.gz
+    movie_run-5:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-5_bold.nii.gz
+    movie_run-6:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-6_bold.nii.gz
+    movie_run-7:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-7_bold.nii.gz
+    movie_run-8:
+      scan: /rigel/psych/users/pab2163/studyforrest/bids_raw_temp/site-1/sub-20/ses-movie/func/sub-20_ses-movie_task-movie_run-8_bold.nii.gz
+  site: site-1
+  subject_id: '20'
+  unique_id: movie
