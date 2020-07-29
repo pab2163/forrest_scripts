@@ -423,86 +423,61 @@ lateral_ventricles_mask :  /usr/share/fsl/5.0/data/atlases/HarvardOxford/Harvard
 
 # Select which nuisance signal corrections to apply:
 Regressors :
-  # Strategy 1 - Global Signal + 24 Motion Parameters + De-Spiking w/ 0.2 FD threshold
- - Motion: 
-      include_delayed: true
-      include_squared: true
-      include_delayed_squared: true
+
+ - Motion:
+     include_delayed: true
+     include_squared: true
+     include_delayed_squared: true
 
    aCompCor:
-        summary:
-          #filter:
-          method: DetrendPC
-          components: 5
-        tissues:
-          - WhiteMatter
-          - CerebrospinalFluid
-        extraction_resolution: 2
+     summary:
+       method: DetrendPC
+       components: 5
+     tissues:
+       - WhiteMatter
+       - CerebrospinalFluid
+     extraction_resolution: 2
 
-   WhiteMatter:
-        summary: Mean
-        extraction_resolution: 2
-        erode_mask: true
-  
    CerebrospinalFluid:
-        summary: Mean
-        extraction_resolution: 2
-        erode_mask: true
+     summary: Mean
+     extraction_resolution: 2
+     erode_mask: true
 
-   GlobalSignal: 
-        summary: Mean
+   GlobalSignal:
+     summary: Mean
 
    PolyOrt:
-        degree: 2  
+    degree: 2
 
-   Censor:
-      method: Interpolate
-      thresholds: 
-         - type: FD_P
-           value: 0.2
-      number_of_previous_trs_to_censor: 1
-      number_of_subsequent_trs_to_censor: 2
-   
    Bandpass:
-        bottom_frequency: 0.009
-        top_frequency: 0.08
+     bottom_frequency: 0.01
+     top_frequency: 0.1
 
-
-# Strategy 2 - Global Signal + 24 Motion Parameters + No Despiking
- - Motion: 
-      include_delayed: true
-      include_squared: true
-      include_delayed_squared: true
+ - Motion:
+     include_delayed: true
+     include_squared: true
+     include_delayed_squared: true
 
    aCompCor:
-        summary:
-          #filter:
-          method: DetrendPC
-          components: 5
-        tissues:
-          - WhiteMatter
-          - CerebrospinalFluid
-        extraction_resolution: 2
+     summary:
+       method: DetrendPC
+       components: 5
+     tissues:
+       - WhiteMatter
+       - CerebrospinalFluid
+     extraction_resolution: 2
 
-   WhiteMatter:
-        summary: Mean
-        extraction_resolution: 2
-        erode_mask: true
-  
    CerebrospinalFluid:
-        summary: Mean
-        extraction_resolution: 2
-        erode_mask: true
-
-   GlobalSignal: 
-        summary: Mean
+     summary: Mean
+     extraction_resolution: 2
+     erode_mask: true
 
    PolyOrt:
-        degree: 2  
-   
+    degree: 2
+
    Bandpass:
-        bottom_frequency: 0.009
-        top_frequency: 0.08
+     bottom_frequency: 0.01
+     top_frequency: 0.1
 
 
 # Correct for the global signal using Median Angle Correction.
@@ -668,7 +643,7 @@ lowPassFreqALFF : [0.1]
 
 
 # Calculate Regional Homogeneity (ReHo) for all voxels.
-runReHo :  [1]
+runReHo :  [0]
 
 
 # Number of neighboring voxels used when calculating ReHo
