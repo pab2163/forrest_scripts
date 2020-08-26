@@ -53,7 +53,7 @@ outputSubjectListLocation: configs
 
 
 # A label to be appended to the generated participant list files.
-subjectListName: cpac_init
+subjectListName: cpac_check_bids_params
 
 
 # Scan/Run ID for the Anatomical Scan
