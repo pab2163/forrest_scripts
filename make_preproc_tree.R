@@ -1,52 +1,53 @@
 library(tidyverse)
 
 
-df = crossing(#RC = 0:1, `RC + RVT-8` = 0:1, `RVT-8` = 0:1, `None` = 0:1,
-              `Despiking with .2mm thresh` = 0:1, 
+df = crossing(`AFNI 3dDespike` =  0:1,
+              `Spike regression with .2mm thresh` = 0:1, 
               `GSR` = 0:1,
               `aCompCor` = 0:1,
-              `filter` = c(1,2,3,4),
-              `Filter (bandpass) at nuisance regression step` = 0:1) %>%
-  mutate(
-         'Notch filter motion params' = ifelse(filter == 1, 1, 0),
-         'Lowpass filter motion params' = ifelse(filter == 2, 1, 0),
-         'Lowpass filter BOLD before 3dvolreg' = ifelse(filter == 3, 1, 0),
-         'No filtering before nuisance regression' = ifelse(filter == 4, 1, 0)) 
+              `Filter` = c(2,3,4))
+
 
 df = crossing(df, pipe = c('RETROICOR', 'RETROICOR + RVT-8', 'No externally-based correction'))
 
 df = df %>%
-  dplyr::arrange(pipe, `Notch filter motion params`, `Lowpass filter motion params`, 
-                 `Lowpass filter BOLD before 3dvolreg`, 
-                 `No filtering before nuisance regression`, GSR, `Despiking with .2mm thresh`, aCompCor, `Filter (bandpass) at nuisance regression step`) %>% 
+  dplyr::arrange(pipe, Filter) %>% 
   mutate(index = 1:nrow(.))
   
 
 df_long = df %>%
   pivot_longer(-c(index, pipe)) %>%
   mutate(category = ifelse(name %in% c('RC', 'RC + RVT-8', 'None', 'RVT-8'), 'Pre-CPAC', 'CPAC')) %>%
-  dplyr::filter(name != 'filter')
+  dplyr::filter() %>%
+  mutate(Filtering = case_when(
+    value == 0 ~ 'no',
+    value == 1 ~ 'yes',
+    value == 2 ~ 'Bandpass data after nuisance reg',
+    value == 3 ~ 'Bandpass data before nuisance reg',
+    value == 4 ~ 'Notch filter motion params before nuisance reg, bandpass data after'))
 
 
 
 df_long$name = factor(df_long$name, levels = rev(c(
-  'No filtering before nuisance regression',
-  'Lowpass filter BOLD before 3dvolreg',
-  'Lowpass filter motion params',
-  'Notch filter motion params',
+  'Filter',
+  'AFNI 3dDespike',
+  'Spike regression with .2mm thresh',
   'GSR',
-  'Despiking with .2mm thresh',
-  'aCompCor',
-  'Filter (bandpass) at nuisance regression step'
+  'aCompCor'
 )))
 
 
 
-ggplot(df_long, aes(x = index, y = name, fill = value)) + 
+tree = ggplot(df_long, aes(x = index, y = name, fill = Filtering)) + 
   geom_tile() + 
   theme_classic() + 
   facet_grid(~pipe, drop = TRUE, scales = 'free') +
-  scale_fill_gradient2(low="white",high="blue") +
-  theme(legend.position = 'None') +
-  labs(x = 'Pipeline #')
+  labs(x = 'Pipeline #', y = '') +
+  scale_fill_manual(breaks = c("Bandpass data after nuisance reg", 'Bandpass data before nuisance reg', 'Notch filter motion params before nuisance reg, bandpass data after'),
+                    values = c('dark blue', "dark red", "black", "dark green", 'white')) +
+  theme(legend.position = 'top', legend.title = element_blank())
+
+tree
+
+ggsave(tree, file = '../plots/preproc_tree.png', width = 12, height = 4)
 

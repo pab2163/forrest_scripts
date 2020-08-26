@@ -1,0 +1,2 @@
+# To run bids validator
+sudo docker run -ti --rm -v /danl/Collaborations/studyforrest/bids_raw:/data:ro bids/validator /data
