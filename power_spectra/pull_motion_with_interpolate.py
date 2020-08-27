@@ -56,7 +56,7 @@ def get_motion_freq(raw_data, tr, scan_id, max_tr_num):
 	# generate spectra for each of the 6 parameters
 	for i in range(6):
 		# generate the fft and raw frequencies
-		fft_init = (fft(raw[:,i]))[0:math.ceil(raw_data.shape[0]/2)]
+		fft_init = (fft(raw_data[:,i]))[0:math.ceil(raw_data.shape[0]/2)]
 		raw_freqs = (fftfreq(raw_data.shape[0]) * sampling_rate)[0:math.ceil(raw_data.shape[0]/2)]
 
 		# if number of trs in scan is not equal to the reference number of TRs, interpolate
