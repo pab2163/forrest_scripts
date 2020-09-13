@@ -1,0 +1,46 @@
+---
+title: "graph_power_spectra"
+author: "Paul Bloom"
+date: "7/9/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+power_spectra = read_csv('respiration_freqs.csv')
+```
+
+
+```{r}
+power_spectra$subject = parse_number(power_spectra$scan_id)*-1
+power_spectra$run = substring(power_spectra$scan_id, 33, 33)
+
+power_spectra = dplyr::filter(power_spectra, frequency <= 1) %>%
+  mutate(., `Log Normalized Power` = scale(log10(`0`)))
+
+
+resp_plot = ggplot(power_spectra, aes(x = frequency, y = run, fill = `Log Normalized Power`)) +
+  geom_tile()  +
+  scale_fill_viridis_c() +
+  facet_grid(rows = vars(subject)) +
+  theme_classic() +
+  labs(x = 'Frequency (Hz)', y = '') +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+
+ggsave(resp_plot, file = '../../plots/resp_freqs.png', height= 8, width = 8)
+```
+
+
+```{r}
+p_wide = power_spectra %>%
+  dplyr::select(frequency, subject, run, `Log Normalized Power`) %>%
+  tidyr::pivot_wider(data = ., names_from = frequency, values_from = `Log Normalized Power`)
+
+write.csv(power_spectra, file = 'clean_power_spectra.csv', row.names = FALSE)
+
+```
+
