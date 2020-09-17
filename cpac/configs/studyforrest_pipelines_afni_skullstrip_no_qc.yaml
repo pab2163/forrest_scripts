@@ -91,7 +91,7 @@ output_tree: "default"
 
 
 # Generate quality control pages containing preprocessing and derivative outputs.
-generateQualityControlImages :  [1]
+generateQualityControlImages :  [0]
 
 
 # Deletes the contents of the Working Directory after running.
