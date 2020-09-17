@@ -1,0 +1,47 @@
+---
+title: "4_more_fd_filter_plots"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(ggplot2)
+library(lme4)
+library(corrplot)
+library(ggcorrplot)
+library(GGally)
+```
+
+## Pull in filtered motion data by tr
+```{r}
+filtered = read.csv('../../data/fd_estimates_filtered.csv', stringsAsFactors = FALSE)
+mriqc = read_tsv('../../data/group_bold.tsv') %>%
+    mutate(scan = gsub('_bold', '', gsub(".*task-","",bids_name)), 
+           subid = str_extract(bids_name, 'sub-[:digit:][:digit:]'))
+
+# get mean, median, and sd of each speficic fd sequence
+fd_stats= filtered %>%
+  group_by(subid, scan, filter) %>%
+  summarise(mean_fd = mean(fd),
+            median_fd = median(fd),
+            sd_fd = sd(fd))
+
+
+fd_stats = left_join(fd_stats, mriqc)
+
+
+ggplot(fd_stats, aes(x = fd_mean, y = mean_fd, color = filter)) + 
+  geom_point()
+
+
+
+ggplot(fd_stats, aes(x = mean_fd, y = dvars_nstd, color = filter)) + 
+  geom_point() +
+  geom_smooth(method = lm)
+
+
+
+
+
+````

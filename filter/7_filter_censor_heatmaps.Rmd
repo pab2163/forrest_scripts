@@ -1,0 +1,116 @@
+---
+title: "filter_censor_heatmaps"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+filtered = read.csv('../../data/fd_estimates_filtered.csv', stringsAsFactors = FALSE)
+```
+
+
+```{r}
+check_censor_effects = function(scan_type, wave){
+  filtered_subset = dplyr::filter(filtered, grepl(scan_type, scan), ses == wave)
+  n_tr = filtered_subset %>%
+      group_by(subid, filter, scan) %>%
+      summarise(n = n()) 
+  
+  # only consider subjects who completed at least half the scan
+  n_tr = n_tr %>%
+      ungroup() %>%
+      dplyr::filter(n > max(n)/2)
+  
+  max_tr = max(n_tr$n)
+  
+  for (cutoff in seq(from = 0, to = .5, by = .02)){
+    tmp = filtered_subset %>%
+      left_join(., n_tr) %>%
+      dplyr::filter((subid %in% n_tr$subid), !is.na(n))  %>%
+      group_by(subid, filter, scan) %>%
+      summarise(prop_above = sum(fd > cutoff)/n(),
+                n_tr = n(),
+                median_fd = median(fd)) %>%
+      mutate(prop_bin = case_when(
+        prop_above < .1 ~ 0, 
+        prop_above >= .1 & prop_above < .2 ~ .1, 
+        prop_above >= .2 & prop_above < .3 ~ .2, 
+        prop_above >= .3 & prop_above < .4 ~ .3, 
+        prop_above >= .4 & prop_above < .5 ~ .4, 
+        prop_above >= .5 & prop_above < .6 ~ .5, 
+        prop_above >= .6 & prop_above < .7 ~ .6, 
+        prop_above >= .7 & prop_above < .8 ~ .7, 
+        prop_above >= .8 & prop_above < .9 ~ .8, 
+        prop_above >= .9 ~ .9),
+      tr_bn = (.9- prop_bin)*max_tr, 
+      cutoff = cutoff) 
+      if (cutoff == 0){
+        compile = tmp
+      }else{
+        compile = rbind(compile, tmp)
+      }
+  }
+  
+
+  
+  compile_rank = compile %>%
+    ungroup() %>%
+    group_by(filter, cutoff) %>%
+    mutate(median_fd_rank = 1 - rank(median_fd, ties.method = 'random')) %>%
+    dplyr::select('TRs below cutoff' = tr_bn, everything())
+  
+  subject_plot = ggplot(compile_rank, aes(x = cutoff, y = median_fd_rank, fill = `TRs below cutoff`)) +
+      geom_tile() + 
+      facet_grid(~filter) +
+      scale_fill_viridis_c() +
+      labs(y = 'Subjects -- Ordered by Median FD', x = 'FD Cutoff', title = paste0(scan_type, ' ', wave)) +
+      theme_bw() +
+      theme(axis.text.y = element_blank())
+  
+  ggsave(subject_plot, filename = paste0('../../plots/censor_tr/tr_thresh_subjects_', sequence, '_', wave, '.pdf'), height = 6, width = 8)
+    
+  
+  compile_group_tr = compile %>%
+    group_by(cutoff, tr_bn, filter) %>%
+    summarise(`Proportion of Scans` = n()/length(unique(filtered_subset$subid)))
+  
+  
+  left = ggplot(compile_group_tr, aes(y = tr_bn, x = cutoff, fill = `Proportion of Scans`)) + geom_tile() +
+    scale_fill_viridis_c() +
+    labs(x = 'FD Cutoff', y = '# of TRs below cutoff\n(ticks show bin minumum)',  title = paste0(scan_type, ' ', wave)) +
+    theme_bw() +
+    facet_grid(~filter) +
+      scale_y_continuous(breaks = seq(from = 0, to = max_tr, length.out = 11))
+  
+  
+  
+  check = filtered_subset %>%
+    dplyr::filter(subid %in% n_tr$subid) %>%
+      group_by(subid, filter, scan) %>%
+      summarise(num_accept = sum(fd < .2))
+  
+  
+  right = ggplot(check, aes(x = filter, y = num_accept)) +
+    geom_boxplot() +
+    labs(y= '# TRs below threshold of .2mm')
+  
+  
+  panel = cowplot::plot_grid(left, right, rel_widths = c(2,1))
+  return(panel)
+}
+```
+
+```{r}
+for (sequence in c('REST', 'face', 'poke_run-1', 'poke_run-2')){
+  for(wave in c('ses-V1W1', 'ses-V2W2')){
+    print(c(sequence, wave))
+    result = check_censor_effects(scan_type = sequence, wave = wave)
+    cowplot::save_plot(result, filename = paste0('../../plots/censor_tr/tr_thresh', sequence, '_', wave, '.pdf'), 
+                       base_height = 6, base_width = 12)
+  }
+}
+```
