@@ -1,0 +1,238 @@
+---
+title: "retroicor_power_spectra"
+author: "Paul Bloom"
+date: "8/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+# run this from command line
+# python pull_motion_with_interpolate.py ../../data/motion_retroicor/ run 350 2 ../../data/retroicor_motion_power_spectra.csv'
+```
+
+
+```{r}
+library(tidyverse)
+
+# read in data in first command-line arg
+power_spectra = read_csv('../../data/retroicor_motion_power_spectra.csv')
+power_spectra  = mutate(power_spectra, 
+                        retroicor = case_when(
+                          grepl('retroicor_filt', scan_id) ~ 'retroicor_filter',
+                          grepl('retroicor.1D', scan_id) ~ 'retroicor',
+                         !grepl('retroicor', scan_id) ~ 'none'))
+
+# z-value cutoff to truncate at (i.e. 2)
+cutoff = 2
+
+# whether to scale within scan or not
+scale_within_scan = FALSE
+
+
+print(c('Min TRs:', min(power_spectra$num_tr)))
+print(c('Max TRs:', max(power_spectra$num_tr)))
+
+# cast to long format
+power_spectra_long = power_spectra %>%
+  pivot_longer(cols = c(0,1,2,3,4,5, 6)) %>%
+  mutate(name = case_when(
+    name == '0' ~ 'roll',
+    name == '1' ~ 'pitch',
+    name == '2' ~ 'yaw',
+    name == '3' ~ 'dS',
+    name == '4' ~ 'dL',
+    name == '5' ~ 'dP',
+  ))
+
+fd_compare = power_spectra_long %>%
+  group_by(scan_id, retroicor) %>%
+  summarise(median_fd = median_fd[1]) %>%
+  mutate(base_name = substring(scan_id, 8, 19))
+
+ggplot(fd_compare, aes(x = retroicor, y = median_fd)) +
+  geom_boxplot(width = .1, position = position_nudge(.1)) +
+  geom_point(alpha = 78) +
+  geom_line(aes(group = base_name), alpha = .7) +
+  labs(y = 'Median FD')
+
+mriqc = read.csv('../../data/fd_estimates_filtered.csv', stringsAsFactors = FALSE) %>% 
+  dplyr::filter(filter == 'unfiltered', grepl('movie', scan), !grepl('localizer', scan)) %>%
+  group_by(subid, scan) %>%
+  summarise(median_fd = median(fd)) %>%
+  mutate(base_name = paste0(subid, '_run_', substring(scan, 11)))
+
+
+fd_compare_wide = fd_compare %>%
+  ungroup() %>%
+  dplyr::select(-scan_id) %>%
+  pivot_wider(names_from = retroicor, values_from = median_fd) %>%
+  mutate(subid = substring(base_name, 0,6))
+
+check_fd = dplyr::left_join(fd_compare_wide, mriqc)
+
+
+retroicor_fd_within = ggplot(fd_compare_wide, aes(x = none, y = retroicor_filter)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) + xlim(0.05, .3) + ylim(0.05, .3) +
+  geom_smooth(method = lm) +
+  theme_bw()
+
+retroicor_fd_within_by_sub = ggplot(fd_compare_wide, aes(x = none, y = retroicor_filter)) +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) + xlim(0.05, .3) + ylim(0.05, .3) +
+  geom_smooth(method = lm) +
+  theme_bw() +
+  facet_wrap('subid')
+
+
+ggsave(retroicor_fd_within, file = '../../plots/retroicor_within_fd.png', height = 5, width = 5)
+ggsave(retroicor_fd_within_by_sub, file = '../../plots/retroicor_within_fd_by_sub.png', height = 10, width = 10)
+
+```
+
+```{r}
+# get scan ranks by median FD
+fd_ranks = power_spectra_long %>%
+  group_by(scan_id, retroicor) %>%
+  summarise(median_fd = median_fd[1]) %>%
+  ungroup() %>%
+  group_by(retroicor) %>%
+  mutate(median_fd_rank = rank(1-median_fd)) %>%
+  dplyr::select(-median_fd)
+
+# join in ranks
+power_spectra_long = power_spectra_long %>%
+  left_join(., fd_ranks, by = c('scan_id', 'retroicor')) %>%
+  ungroup()
+
+# take log10, then z-score data (either within scan or across all scans)
+if (scale_within_scan == TRUE){
+  power_spectra_z = power_spectra_long %>%
+  group_by(scan_id, name) %>%
+  mutate(pow_scaled = scale(log10(value)), 
+         pow_scaled = case_when(pow_scaled > cutoff ~ cutoff,
+                                pow_scaled < -1*cutoff ~ -1*cutoff,
+                                pow_scaled >= -1*cutoff & pow_scaled <= cutoff ~ pow_scaled))
+}else{
+  power_spectra_z = power_spectra_long %>%
+    ungroup() %>%
+    mutate(pow_scaled = scale(log10(value)), 
+           pow_scaled = case_when(pow_scaled > cutoff ~ cutoff,
+                                  pow_scaled < -1*cutoff ~ -1*cutoff,
+                                  pow_scaled >= -1*cutoff & pow_scaled <= cutoff ~ pow_scaled))
+}
+cutoff = 5
+
+power_spectra_wider = power_spectra_long %>%
+  dplyr::select(-num_tr) %>%
+  dplyr::mutate(scan_id = substring(scan_id, 0, 19)) %>%
+  pivot_wider(id_cols = c(frequency, scan_id, name), names_from = retroicor, values_from = value) %>%
+  mutate(subtract = log10(retroicor_filter) - log10(none), 
+         pow_scaled = scale(subtract, center = FALSE),
+         pow_scaled = case_when(pow_scaled > cutoff ~ cutoff,
+                                  pow_scaled < -1*cutoff ~ -1*cutoff,
+                                  pow_scaled >= -1*cutoff & pow_scaled <= cutoff ~ pow_scaled))
+
+
+power_spectra_wider_summary = power_spectra_wider %>%
+  group_by(frequency, name) %>%
+  summarise(median_diff = median(subtract),
+            mean_diff = mean(subtract),
+            lwr = quantile(subtract, .25),
+            upr = quantile(subtract, .75))
+
+ggplot(power_spectra_wider_summary, aes(x = frequency, y = median_diff)) +
+  geom_hline(yintercept = 0) + 
+  geom_ribbon(aes(ymin= lwr, ymax = upr), alpha = .3) +
+  geom_line() +
+  geom_line(aes(y = mean_diff, color = 'red')) +
+  facet_wrap('name')
+
+smooth_subject_power_direction = power_spectra_wider %>%
+  mutate(subid = substring(scan_id, 0, 13)) %>%
+  ggplot(data= ., aes(x = frequency, y = subtract, color= subid)) +
+    geom_hline(yintercept = 0) + 
+    stat_smooth(se = FALSE) +
+    facet_wrap('name') +
+    labs(y = 'Post-retroicor - pre-retroicor power')
+
+ggsave(smooth_subject_power_direction, file = '../../plots/retroicor_power_smooth.png', height = 8, width = 12)
+
+
+smooth_subject_power_direction
+power_spectra_wider = left_join(power_spectra_wider, mutate(fd_ranks, scan_id = substring(scan_id, 0, 19)) %>%
+  dplyr::filter(retroicor == 'none'))
+
+
+plt_subtract = ggplot(power_spectra_wider, aes(x = frequency, y = median_fd_rank, fill = pow_scaled)) +
+  geom_tile() +
+  theme_bw() +
+  scale_fill_viridis_c() +
+  labs(fill = 'Power (z-scored)', x = 'Frequency', y = 'Scams Ranked by FD') +
+  theme(axis.text.y = element_blank()) +
+  facet_grid(cols =vars(name))
+
+
+# make plot
+plt = ggplot(power_spectra_z, aes(x = frequency, y = median_fd_rank, fill = pow_scaled)) +
+  geom_tile() +
+  facet_grid(retroicor~name) +
+  theme_bw() +
+  scale_fill_viridis_c() +
+  labs(fill = 'Power (z-scored)', x = 'Frequency', y = 'Scams Ranked by FD') +
+  theme(axis.text.y = element_blank())
+
+ggsave(plt, file = '../../plots/power_spectra_retroicor.png', height = 8, width = 12)
+ggsave(plt_subtract, file = '../../plots/power_spectra_retroicor_post_pre_subtract.png', height = 8, width = 12)
+
+
+```
+
+```{r}
+re = read.csv('retroicor_motion_diff.csv', stringsAsFactors = FALSE)
+
+names(re)[1:6] = c('roll', 'pitch', 'yaw', 'dS', 'dL', 'dP')
+
+re = dplyr::mutate(re, subject = substring(file, 36, 41),
+            run = substring(file, 47, 47),
+            retroicor = case_when(
+                          grepl('retroicor_filt', file) ~ 'retroicor_filter',
+                          grepl('retroicor.1D', file) ~ 'retroicor',
+                         !grepl('retroicor', substring(file, 40)) ~ 'none'))
+
+
+dplyr::filter(re, subject == 'sub-03', run == '8') %>%
+  pivot_longer(-c(file, tr, subject, run, retroicor)) %>%
+  ggplot(data = ., aes(x= tr, y = abs(value), color = retroicor)) +
+    geom_point(alpha = .5) +
+    geom_line(alpha = .5) +
+    facet_wrap(~name) +
+    ylim(0, 0.2)
+
+```
+
+
+```{r}
+
+re_long = dplyr::filter(re) %>%
+  pivot_longer(-c(file, tr, subject, run, retroicor)) %>%
+  group_by(subject, run, retroicor, name) %>%
+  summarise(median_fd = median(abs(value)))
+
+median_fd_retroicor_params = ggplot(re_long, aes(x = name, color = retroicor, y = median_fd)) +
+  geom_boxplot()
+
+ggplot(re_long, aes(x = retroicor, y = median_fd)) +
+  geom_point(alpha = .5) + 
+  geom_line(aes(group = interaction(subject, run)), alpha = .2) +
+  facet_wrap('name', scales = 'free_x') 
+  
+
+
+ggsave(median_fd_retroicor_params, file = '../../plots/median_fd_power_spectra_params.pdf')
+  
+```

@@ -1,0 +1,96 @@
+---
+title: "filter_censor_heatmaps"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+filtered = read.csv('../../data/fd_estimates_filtered.csv', stringsAsFactors = FALSE)
+```
+
+
+```{r}
+
+ggplot(filtered, aes(fd)) + 
+  facet_grid(~filter) + 
+  geom_histogram(bins = 100) +
+  xlim(0,1)
+
+
+```
+
+
+```{r}
+filtered_wide = filtered %>%
+  spread(key = filter, value = fd)
+
+
+filtered_wide = mutate(filtered_wide, category = case_when(
+  lowpass >= .2 & unfiltered >= .2 ~ 'censored (whether lowpass or unfiltered)',
+  lowpass >= .2 & unfiltered  < .2 ~ 'lost (censored only with lowpass)',
+  lowpass < .2 & unfiltered >= .2 ~ 'rescued (censored only without lowpass)',
+  lowpass < .2 & unfiltered < .2 ~ 'low motion'
+))
+
+category_medians = filtered_wide %>%
+  group_by(category) %>%
+  summarise(median = median(unfiltered)) %>%
+  dplyr::filter(category != 'low motion')
+
+fd_rescue= ggplot(dplyr::filter(filtered_wide, category != 'low motion'), aes(x = unfiltered, fill = category)) + 
+  geom_histogram(alpha = .5, bins = 100, position = 'identity') +
+  geom_vline(data = category_medians, aes(xintercept = median, color = category)) +
+  xlim(0,2) +
+  theme_bw() +
+  labs(x = 'Unfiltered TR-wise FD', title = 'Distributions of TRs censored, rescued, and lost with lowpass filter with .2mm cutoff')
+
+
+
+
+ggsave(fd_rescue, file = '../../plots/fd_rescue_lowpass.png', height = 6, width = 10)
+
+```
+
+
+
+```{r}
+
+
+a = table(filtered_wide$category)
+```
+
+
+
+```{r}
+lost = dplyr::filter(filtered_wide, category == 'lost (censored only with lowpass)') 
+
+dplyr::filter(lost, scan == 'REST_run-1') %>%
+  ggplot(data = .) + 
+  geom_histogram(aes(tr), bins = 100)
+
+labels = dplyr::select(filtered_wide, subid,  scan, tr, category)
+
+filtered_l = left_join(filtered, labels)
+
+sub_10_movie_7_lost = dplyr::filter(filtered_l, subid == 'sub-10', scan == 'movie_run-7') %>%
+  mutate(lost_indicator = case_when(
+    grepl('lost', category) ~ 'lost',
+    !grepl('lost', category) ~ 'not lost'),
+    fd = ifelse(fd > 2, 2, fd)) %>%
+  ggplot(data = ., aes(x = tr, y = fd, group = filter, color = lost_indicator)) +
+  geom_hline(yintercept = 0.2, lty = 2) + 
+  geom_line(color = 'black', alpha = .5) +
+  geom_point(size = 1) + 
+  facet_wrap(~filter, nrow = 3) +
+  theme_bw() + ylim(0, 2) + 
+  labs(x = 'Frame', y = 'FD', title = 'Lost TRs before/after large FD', subtitle = 'FD scale truncated at 2mm max for visualization') +
+  theme(legend.title = element_blank()) +
+  scale_y_continuous(breaks = seq(from = 0, to = 2, by = .4)) +
+  scale_color_manual(values = c('red', 'black'))
+
+ggsave(sub_10_movie_7_lost, file = '../../plots/sub_10_movie_7_lowpass_lost.png', width = 18, height = 10)
+```
