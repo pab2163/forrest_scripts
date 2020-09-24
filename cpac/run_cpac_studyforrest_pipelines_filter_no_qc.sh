@@ -4,7 +4,7 @@
 #SBATCH --job-name=forrest_cpac_fork_pipeine_filter_no_qc
 #SBATCH --mail-type=ALL
 #SBATCH --constraint=docker
-#SBATCH -c 8
+#SBATCH -c 20
 #SBATCH --time=11:55:00
 #SBATCH --mem-per-cpu=20gb
 
