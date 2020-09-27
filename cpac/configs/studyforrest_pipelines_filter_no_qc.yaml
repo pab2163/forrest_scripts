@@ -658,9 +658,10 @@ functional_volreg_twopass :  On
 # Adapted from DCAN Labs filter.
 #     https://www.ohsu.edu/school-of-medicine/developmental-cognition-and-neuroimaging-lab
 #     https://www.biorxiv.org/content/10.1101/337360v1.full.pdf
+# THE FILTER ISNT FORKABLE YET (most items in list brackets should be forkable)
 motion_estimate_filter:
 
-    run: [True, False]
+    run: True
 
     # options: "notch", "lowpass"
     filter_type: "lowpass"
@@ -1109,7 +1110,8 @@ Regressors :
 
 # Whether to run frequency filtering before or after nuisance regression.
 # ['Before'] or ['After']
-filtering_order: ['After', 'Before']
+# NOT YET FORKABLE
+filtering_order: ['After']
 
 
 # Correct for the global signal using Median Angle Correction.
@@ -1121,7 +1123,7 @@ targetAngleDeg : [90]
 
 
 # Extract the average time series of one or more ROIs/seeds. Must be enabled if you wish to run Seed-based Correlation Analysis.
-runROITimeseries :  [1]
+runROITimeseries :  [0]
 
 
 # Functional time-series and ROI realignment method: ['ROI_to_func'] or ['func_to_ROI']
